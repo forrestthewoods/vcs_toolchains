@@ -18,7 +18,7 @@ cd "$SCRIPT_DIR/build"
 
 # build
 ../toolchains/linux/ubuntu/cmake/bin/cmake -G Ninja -D CMAKE_MAKE_PROGRAM=~/code/vcs_toolchains/toolchains/linux/ubuntu/ninja/ninja ..
-../toolchains/linux/ubuntu/cmake/bin/cmake --build .
+../toolchains/linux/ubuntu/ninja/ninja
 
 # navigate back
 cd ..

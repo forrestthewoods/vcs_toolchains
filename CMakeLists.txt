@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.26)
 
 set(CMAKE_CXX_COMPILER_ID "Clang")
 set(CMAKE_C_COMPILER_ID "Clang")
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(WIN32)
     set(CMAKE_CXX_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/win/LLVM/bin/clang++.exe")
@@ -10,6 +13,7 @@ if(WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-pc-windows-gnu")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target x86_64-pc-windows-gnu")
     set(TARGET_TRIPLET "x86_64-pc-windows-gnu")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=lld")
 
     include_directories(
         "${CMAKE_SOURCE_DIR}/toolchains/win/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++"
@@ -28,6 +32,7 @@ elseif(UNIX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -stdlib=libc++")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target xx86_64-linux-gnu")
     set(TARGET_TRIPLET "x86_64-linux-gnu")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/mold/bin/mold")
 
     include_directories(
         "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/include/c++/v1"
@@ -36,10 +41,10 @@ elseif(UNIX)
 
     link_directories(
         "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/lib/x86_64-unknown-linux-gnu"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/lib/clang/17/lib/x86_64-unknown-linux-gnu"
     )
 endif()
 
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=lld")
 
 set(CMAKE_C_COMPILER_WORKS 1)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
