@@ -29,14 +29,15 @@ elseif(UNIX)
     set(CMAKE_CXX_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/bin/clang++")
     set(CMAKE_C_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/bin/clang++")
     set(CMAKE_RC_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/bin/llvm-rc")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -stdlib=libc++")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target xx86_64-linux-gnu")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -nostdinc -nostdlib")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target xx86_64-linux-gnu -nostdinc")
     set(TARGET_TRIPLET "x86_64-linux-gnu")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/mold/bin/mold")
 
     include_directories(
         "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/include/c++/v1"
         "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/include/x86_64-unknown-linux-gnu/c++/v1"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/libc6/usr/include"
     )
 
     link_directories(
