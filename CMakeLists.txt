@@ -30,8 +30,8 @@ elseif(UNIX)
     set(CMAKE_CXX_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang++")
     set(CMAKE_C_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang")
     set(CMAKE_RC_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/llvm-rc")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -nostdinc -nostdlib")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target x86_64-linux-gnu -nostdinc")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu --stdlib=libc++")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target x86_64-linux-gnu")
     set(TARGET_TRIPLET "x86_64-linux-gnu")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=${CMAKE_SOURCE_DIR}/toolchains/linux/mold/bin/mold")
 
@@ -39,15 +39,15 @@ elseif(UNIX)
         "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/include/c++/v1"
         "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/include/x86_64-unknown-linux-gnu/c++/v1"
         "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/clang/17/include"
-        "${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include"
-        "${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include/linux"
-        "${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include/x86_64-linux-gnu"
+        #"${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include"
+        #"${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include/linux"
+        #"${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include/x86_64-linux-gnu"
     )
 
     link_directories(
         "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/x86_64-unknown-linux-gnu"
         "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/clang/17/lib/x86_64-unknown-linux-gnu"
-        "${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/lib/x86_64-linux-gnu"
+        #"${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/lib/x86_64-linux-gnu"
     )
 endif()
 
