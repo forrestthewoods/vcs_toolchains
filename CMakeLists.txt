@@ -5,6 +5,7 @@ set(CMAKE_C_COMPILER_ID "Clang")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_BUILD_TYPE Debug)
 
 if(WIN32)
     set(CMAKE_CXX_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/win/LLVM/bin/clang++.exe")
@@ -30,19 +31,23 @@ elseif(UNIX)
     set(CMAKE_C_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang++")
     set(CMAKE_RC_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/llvm-rc")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -nostdinc -nostdlib")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target xx86_64-linux-gnu -nostdinc")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target x86_64-linux-gnu -nostdinc")
     set(TARGET_TRIPLET "x86_64-linux-gnu")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=${CMAKE_SOURCE_DIR}/toolchains/linux/mold/bin/mold")
 
     include_directories(
         "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/include/c++/v1"
         "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/include/x86_64-unknown-linux-gnu/c++/v1"
-        "${CMAKE_SOURCE_DIR}/toolchains/linux/libc6/usr/include"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/clang/17/include"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include/linux"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include/x86_64-linux-gnu"
     )
 
     link_directories(
         "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/x86_64-unknown-linux-gnu"
         "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/clang/17/lib/x86_64-unknown-linux-gnu"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/lib/x86_64-linux-gnu"
     )
 endif()
 
@@ -65,8 +70,11 @@ add_subdirectory(thirdparty/fmt)
 
 add_executable(main sample_cpp_app/main.cpp)
 
-target_link_libraries(main fmt::fmt)
+target_link_libraries(main fmt::fmt c++)
 
+if(UNIX)
+    target_link_libraries(main fmt::fmt gcc gcc_s c)
+endif()
 
 # Deply DLLs
 if(WIN32)
