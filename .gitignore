@@ -32,7 +32,6 @@
 *.app
 
 # Stuff
-Build/
-Bin/
-CMakeFiles/
-CMakeCache.txt
+build/
+bin/
+
