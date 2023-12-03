@@ -36,7 +36,6 @@ elseif(UNIX)
 
     link_directories(
         "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/lib/x86_64-unknown-linux-gnu"
-        "/usr/lib/x86_64-linux-gnu"
     )
 endif()
 
