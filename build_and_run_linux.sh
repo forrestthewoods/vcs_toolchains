@@ -17,8 +17,8 @@ export PATH=""
 cd "$SCRIPT_DIR/build"
 
 # build
-../toolchains/linux/ubuntu/cmake/bin/cmake -G Ninja -D CMAKE_MAKE_PROGRAM=~/code/vcs_toolchains/toolchains/linux/ubuntu/ninja/ninja ..
-../toolchains/linux/ubuntu/ninja/ninja
+../toolchains/linux/cmake/bin/cmake -G Ninja -D CMAKE_MAKE_PROGRAM=~/code/vcs_toolchains/toolchains/linux/ninja/ninja ..
+../toolchains/linux/ninja/ninja
 
 # navigate back
 cd ..

@@ -26,23 +26,23 @@ if(WIN32)
         "${CMAKE_SOURCE_DIR}/toolchains/win/mingw64/x86_64-w64-mingw32/lib"
     )
 elseif(UNIX)
-    set(CMAKE_CXX_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/bin/clang++")
-    set(CMAKE_C_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/bin/clang++")
-    set(CMAKE_RC_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/bin/llvm-rc")
+    set(CMAKE_CXX_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang++")
+    set(CMAKE_C_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang++")
+    set(CMAKE_RC_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/llvm-rc")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -nostdinc -nostdlib")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target xx86_64-linux-gnu -nostdinc")
     set(TARGET_TRIPLET "x86_64-linux-gnu")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/mold/bin/mold")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=${CMAKE_SOURCE_DIR}/toolchains/linux/mold/bin/mold")
 
     include_directories(
-        "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/include/c++/v1"
-        "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/include/x86_64-unknown-linux-gnu/c++/v1"
-        "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/libc6/usr/include"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/include/c++/v1"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/include/x86_64-unknown-linux-gnu/c++/v1"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/libc6/usr/include"
     )
 
     link_directories(
-        "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/lib/x86_64-unknown-linux-gnu"
-        "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/lib/clang/17/lib/x86_64-unknown-linux-gnu"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/x86_64-unknown-linux-gnu"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/clang/17/lib/x86_64-unknown-linux-gnu"
     )
 endif()
 
