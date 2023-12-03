@@ -11,7 +11,7 @@ rm -rf "$SCRIPT_DIR/bin"
 mkdir "$SCRIPT_DIR/build"
 
 # Nuke  environment
-export PATH=""
+#export PATH=""
 
 # Move to build dir
 cd "$SCRIPT_DIR/build"

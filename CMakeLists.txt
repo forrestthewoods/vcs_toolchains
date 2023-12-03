@@ -25,13 +25,18 @@ elseif(UNIX)
     set(CMAKE_CXX_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/bin/clang++")
     set(CMAKE_C_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/bin/clang++")
     set(CMAKE_RC_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/bin/llvm-rc")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -stdlib=libc++")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target xx86_64-linux-gnu")
     set(TARGET_TRIPLET "x86_64-linux-gnu")
 
     include_directories(
         "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/include/c++/v1"
         "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/include/x86_64-unknown-linux-gnu/c++/v1"
+    )
+
+    link_directories(
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/ubuntu/LLVM/lib/x86_64-unknown-linux-gnu"
+        "/usr/lib/x86_64-linux-gnu"
     )
 endif()
 
@@ -57,8 +62,9 @@ add_executable(main sample_cpp_app/main.cpp)
 
 target_link_libraries(main fmt::fmt)
 
+
 # Deply DLLs
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+if(WIN32)
     set(DLL_ROOT "${CMAKE_SOURCE_DIR}/toolchains/win/mingw64/bin/")
     set(DLL_NAMES libstdc++-6.dll libgcc_s_Seh-1.dll libwinpthread-1.dll)
 
