@@ -28,7 +28,7 @@ if(WIN32)
     )
 elseif(UNIX)
     set(CMAKE_CXX_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang++")
-    set(CMAKE_C_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang++")
+    set(CMAKE_C_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang")
     set(CMAKE_RC_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/llvm-rc")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -nostdinc -nostdlib")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target x86_64-linux-gnu -nostdinc")
@@ -59,9 +59,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 project(HelloWorld)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
 add_compile_options(-Wno-pragma-pack)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -70,10 +67,10 @@ add_subdirectory(thirdparty/fmt)
 
 add_executable(main sample_cpp_app/main.cpp)
 
-target_link_libraries(main fmt::fmt c++)
+target_link_libraries(main fmt::fmt)
 
 if(UNIX)
-    target_link_libraries(main fmt::fmt gcc gcc_s c)
+    target_link_libraries(main c++ gcc gcc_s c)
 endif()
 
 # Deply DLLs
