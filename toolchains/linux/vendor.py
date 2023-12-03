@@ -33,6 +33,9 @@ def main(package_names):
     download_dir = "downloads"
     extract_dir = "vendor"
 
+    # Delete old content
+    shutil.rmtree(extract_dir)
+
     # Create directories
     os.makedirs(download_dir, exist_ok=True)
     os.makedirs(extract_dir, exist_ok=True)
@@ -51,5 +54,5 @@ def main(package_names):
     shutil.rmtree(download_dir)
 
 if __name__ == "__main__":
-    packages = ["libc6-dev", "libgcc-9-dev"]
+    packages = ["libc6-dev", "gcc"]
     main(packages)
