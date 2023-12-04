@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.26)
 
-#set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(CMAKE_CXX_COMPILER_ID "Clang")
 set(CMAKE_C_COMPILER_ID "Clang")
@@ -33,12 +33,12 @@ elseif(UNIX)
     set(CMAKE_C_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang")
     set(CMAKE_RC_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/llvm-rc")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -stdlib=libc++")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --gcc-install-dir=${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/gcc/x86_64-linux-gnu/11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --gcc-install-dir=${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/gcc/x86_64-linux-gnu/11")
     #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target x86_64-linux-gnu --no-standard-includes")
     set(TARGET_TRIPLET "x86_64-linux-gnu")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=${CMAKE_SOURCE_DIR}/toolchains/linux/mold/bin/mold")
-    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-print-map")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-print-map")
 
     include_directories(
         "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/include/c++/v1"
@@ -72,12 +72,10 @@ add_subdirectory(thirdparty/fmt)
 
 add_executable(main sample_cpp_app/main.cpp)
 
-#target_link_libraries(main fmt::fmt)
-target_link_libraries(main)
+target_link_libraries(main fmt::fmt)
 
 if(UNIX)
     #target_link_libraries(main gcc gcc_s c)
-    #target_link_libraries(c++)
     target_link_libraries(main ${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/x86_64-unknown-linux-gnu/libc++.so)
 endif()
 
