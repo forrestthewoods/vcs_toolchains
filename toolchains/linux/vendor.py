@@ -54,5 +54,5 @@ def main(package_names):
     shutil.rmtree(download_dir)
 
 if __name__ == "__main__":
-    packages = ["libc6-dev", "gcc"]
+    packages = ["libc6-dev", "libc6", "gcc", "gcc-s1"]
     main(packages)
