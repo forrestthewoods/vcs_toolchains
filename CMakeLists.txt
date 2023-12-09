@@ -29,20 +29,27 @@ if(WIN32)
         "${CMAKE_SOURCE_DIR}/toolchains/win/mingw64/x86_64-w64-mingw32/lib"
     )
 elseif(UNIX)
+    set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+    set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+    set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+    set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+
     set(CMAKE_CXX_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang++")
     set(CMAKE_C_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang")
     set(CMAKE_RC_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/llvm-rc")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -stdlib=libc++ --static")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -nostdlib")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --gcc-install-dir=${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/gcc/x86_64-linux-gnu/11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --sysroot=${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/")
     #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target x86_64-linux-gnu --no-standard-includes")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target x86_64-linux-gnu --no-standard-includes -nostdlib")
     set(TARGET_TRIPLET "x86_64-linux-gnu")
-    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=${CMAKE_SOURCE_DIR}/toolchains/linux/mold/bin/mold")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=${CMAKE_SOURCE_DIR}/toolchains/linux/mold/bin/mold -v")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=lld -v")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/x86_64-linux-gnu")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/gcc/x86_64-linux-gnu/11")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -nostdlib")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-print-map")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -nostdlib -nodefaultlibs")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-print-map")
+
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/include/c++/v1")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/include/x86_64-unknown-linux-gnu/c++/v1")
@@ -61,7 +68,7 @@ elseif(UNIX)
 
     link_directories("${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/x86_64-linux-gnu")
     link_directories(
-        #"${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/x86_64-unknown-linux-gnu"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/x86_64-unknown-linux-gnu"
         #"${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/clang/17/lib/x86_64-unknown-linux-gnu"
         #"${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/lib/x86_64-linux-gnu"
         #"${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/x86_64-linux-gnu"
@@ -87,6 +94,7 @@ target_link_libraries(main fmt::fmt)
 
 if(UNIX)
     target_link_libraries(main c c++ gcc gcc_s) 
+    #target_link_libraries(main c c++ gcc gcc_s) 
     #target_link_libraries(main ${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/x86_64-unknown-linux-gnu/libc++.so)
 endif()
 
