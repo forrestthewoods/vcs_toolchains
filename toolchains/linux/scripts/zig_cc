@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Get the directory of the script
+SCRIPT_DIR=$(/usr/bin/dirname "$0")
+
+# Construct the path to the executable
+# Replace './path/to/executable' with the actual relative path
+EXECUTABLE_PATH="$SCRIPT_DIR/../zig/zig"
+
+# Forward all arguments to the executable
+"$EXECUTABLE_PATH" cc "$@"
