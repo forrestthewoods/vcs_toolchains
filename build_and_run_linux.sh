@@ -12,6 +12,12 @@ mkdir "$SCRIPT_DIR/build"
 
 # Nuke environment
 export PATH=""
+#export CC="./toolchain/linux/scripts/zig_cc.sh"
+#export CXX="./toolchain/linux/scripts/zig_cxx.sh"
+
+# Linux is stupid
+#export CC="$SCRIPT_DIR/toolchains/linux/zig/zig cc"
+#export CXX="$SCRIPT_DIR/toolchains/linux/zig/zig c++"
 
 # Move to build dir
 cd "$SCRIPT_DIR/build"
