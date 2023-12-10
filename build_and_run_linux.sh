@@ -21,7 +21,7 @@ cd "$SCRIPT_ABSDIR/build"
 
 # build
 ../toolchains/linux/cmake/bin/cmake -G Ninja -D CMAKE_MAKE_PROGRAM=$SCRIPT_ABSDIR/toolchains/linux/ninja/ninja ..
-../toolchains/linux/ninja/ninja -v
+../toolchains/linux/ninja/ninja
 
 # navigate back
 cd ..
