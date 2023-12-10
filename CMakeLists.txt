@@ -41,18 +41,19 @@ elseif(UNIX)
     set(CMAKE_CXX_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang++")
     set(CMAKE_C_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/clang")
     set(CMAKE_RC_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/bin/llvm-rc")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -nostdlib")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --gcc-install-dir=${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/gcc/x86_64-linux-gnu/11")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --sysroot=${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/")
+    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -target x86_64-linux-gnu -nostdlib")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --gcc-install-dir=${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/gcc/x86_64-linux-gnu/11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --sysroot=${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/")
     #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -gdwarf-4")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -target x86_64-linux-gnu --no-standard-includes -nostdlib")
+    #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --no-standard-includes -nostdlib")
     set(TARGET_TRIPLET "x86_64-linux-gnu")
     #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=${CMAKE_SOURCE_DIR}/toolchains/linux/mold/bin/mold -v")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=lld -v")
     #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/x86_64-linux-gnu")
     #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/gcc/x86_64-linux-gnu/11")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -nostdlib -nodefaultlibs")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -nostdlib -nodefaultlibs")
     #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-print-map")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-e,main")
 
@@ -63,8 +64,8 @@ elseif(UNIX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem${CMAKE_SOURCE_DIR}/toolchains/linux/zig/lib/libc/include/generic-glibc")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem${CMAKE_SOURCE_DIR}/toolchains/linux/zig/lib/libc/include/any-linux-any")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem${CMAKE_SOURCE_DIR}/toolchains/linux/zig/lib/libc/glibc/include")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include/x86_64-linux-gnu")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/include/x86_64-linux-gnu")
 
     # include_directories(
     #     "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/include/c++/v1"
@@ -78,9 +79,9 @@ elseif(UNIX)
     #link_directories("${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/x86_64-linux-gnu")
     link_directories(
         "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/x86_64-unknown-linux-gnu"
-        #"${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/clang/17/lib/x86_64-unknown-linux-gnu"
-        #"${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/lib/x86_64-linux-gnu"
-        #"${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/x86_64-linux-gnu"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/LLVM/lib/clang/17/lib/x86_64-unknown-linux-gnu"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/lib/x86_64-linux-gnu"
+        "${CMAKE_SOURCE_DIR}/toolchains/linux/vendor/usr/lib/x86_64-linux-gnu"
     )
 endif()
 

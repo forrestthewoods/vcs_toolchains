@@ -10,7 +10,7 @@ rm -rf "$SCRIPT_DIR/bin"
 # Create dirs
 mkdir "$SCRIPT_DIR/build"
 
-# Nuke  environment
+# Nuke environment
 export PATH=""
 
 # Move to build dir
