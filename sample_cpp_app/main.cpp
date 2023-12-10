@@ -9,10 +9,10 @@ int main(int argc, char* argv[]) {
     auto bytes = malloc(42);
 
     //printf("%d", x);
-    std::vector<int> nums;
-    nums.push_back(x);
+    // std::vector<int> nums;
+    // nums.push_back(x);
 
-    fmt::print("Hello world from C++ 👋\n");
-    fmt::print("goodbye cruel world from C++ ☠️\n");
+    // fmt::print("Hello world from C++ 👋\n");
+    // fmt::print("goodbye cruel world from C++ ☠️\n");
     return 0;
 }
