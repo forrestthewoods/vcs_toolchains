@@ -2,8 +2,6 @@
 
 # Everything is relative to script dir
 SCRIPT_RELDIR=$(dirname "$0")
-echo "Script dir is $SCRIPT_DIR"
-
 SCRIPT_ABSDIR=$(readlink -f $SCRIPT_RELDIR)
 
 # Nuke old directories
