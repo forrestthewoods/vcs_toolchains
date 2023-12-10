@@ -15,13 +15,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Debug/Release
 set(CMAKE_BUILD_TYPE Debug)
 
-# Specify toolchain paths
 if(UNIX)
+    # Specify toolchain paths
     set(CMAKE_C_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/scripts/zig_cc")
     set(CMAKE_CXX_COMPILER "${CMAKE_SOURCE_DIR}/toolchains/linux/scripts/zig_cxx")
     set(CMAKE_AR "${CMAKE_SOURCE_DIR}/toolchains/linux/scripts/zig_ar")
     set(CMAKE_RANLIB "${CMAKE_SOURCE_DIR}/toolchains/linux/scripts/zig_ranlib")
-    endif()
+endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
