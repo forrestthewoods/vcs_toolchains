@@ -32,7 +32,3 @@ add_subdirectory(thirdparty/fmt)
 project(HelloWorld)
 add_executable(main sample_cpp_app/main.cpp)
 target_link_libraries(main fmt::fmt)
-
-
-
-#add_executable(main sample_cpp_app/simple.c)
